@@ -19,7 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::controller(EmailController::class)->group(function(){
+Route::controller(EmailController::class)->group(function(){
 
     Route::post('send-email',[EmailController::class, 'sendEmail']);
-// });
+    Route::get('send-email',[EmailController::class, 'viewEmail']);
+});

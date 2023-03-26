@@ -28,4 +28,10 @@ class EmailController extends Controller
         return response()->json(['message' => 'El correo se envió con éxito']);
 
     }
+
+    public function viewEmail(Request $request){
+
+        return view('correo');
+
+    }
 }

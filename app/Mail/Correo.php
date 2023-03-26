@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Faker\Provider\ar_EG\Address;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -25,9 +26,32 @@ class Correo extends Mailable
         $this->mensaje = $mensaje;
     }
 
-    public function build()
+    // public function build()
+    // {
+    //     return $this->view('correo')->with(['mensaje' => $this->mensaje]);
+    // }
+
+    /**
+     * Get the message envelope.
+     *
+     * @return \Illuminate\Mail\Mailables\Envelope
+     */
+    public function envelope()
     {
-        return $this->view('correo')->with(['mensaje' => $this->mensaje]);
+        return new Envelope(
+            subject: 'BCP Informa',
+        );
     }
 
+    /**
+     * Get the message content definition.
+     *
+     * @return \Illuminate\Mail\Mailables\Content
+     */
+    public function content()
+    {
+        return new Content(
+            html: 'correo'
+        );
+    }
 }
