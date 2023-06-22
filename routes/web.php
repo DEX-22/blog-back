@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+   
+    Route::get('user',function(){
+        return response()->json(["user"=>auth()->user()],200);
+    });
+});
