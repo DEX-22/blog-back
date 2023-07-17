@@ -13,11 +13,16 @@ class LoginController extends Controller
     public function login(LoginRequest $request){
      
         
-        $user = User::where('name',$request->user_name)->first();
-    
-        
-        $passwordIsCorrect = Crypt::decryptString($user->password) == $request->password;
-        
+        try {
+            
+            $user = User::where('name',$request->user_name)->first();
+            $passwordIsCorrect = Crypt::decryptString($user->password) == $request->password;
+
+        } catch (\Throwable $th) {
+            return response()->json($user->password,500);
+        }
+
+
         if( $user->id && $passwordIsCorrect){
             $token = $token ?? $user->createToken('token')->plainTextToken;
     

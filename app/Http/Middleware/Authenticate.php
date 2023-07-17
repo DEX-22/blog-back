@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     {
 
         if (! $request->expectsJson() || $request->bearerToken() === null) {
-            return '404';
+            return '401';
         }
 
     }

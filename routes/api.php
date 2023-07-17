@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\Registercontroller;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\UserController;
+use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -19,24 +22,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [LoginController::class,'register']);
+Route::post('/register', [Registercontroller::class,'register']);
 Route::post('/login', [LoginController::class,'login'])->name('api.login');
 
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::prefix( 'auth')->middleware('auth')->group( function () {
    
-    Route::post('user',function(){
-        return auth()->user() ?? 'api/login';
-    });
+    Route::post('user',[UserController::class,'index']);
 });
 
 // Route::group(['middleware' => ['blog:sanctum'] ],function () {
-//     Route::prefix('blog')->middleware('blog')->group(function(){
-//         Route::get('test',function ()
-//         {
-//             return 'holio';
-//         });
-//     });
+    Route::prefix('blog')->group(function(){
+        Route::get('login',function (){
+
+            $blog= Blog::find(1);
+            
+            $token = $blog->createToken('blog-token')->plainTextToken;
+            return $token;
+        });
+
+
+       Route::group(['middleware' => 'blog'],function(){
+        Route::get('test',function ()
+        {
+            return 'holio';
+        });
+        
+       });
+      
+    });
 // });
 
 

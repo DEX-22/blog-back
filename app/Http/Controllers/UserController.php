@@ -14,7 +14,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            if(auth()->user())
+        return response()->json([ 'yes'],200);
+        else
+        return response()->json([ 'no'],500);
+        }catch(\Throwable $e){
+            return $e;
+        }
     }
 
     /**
