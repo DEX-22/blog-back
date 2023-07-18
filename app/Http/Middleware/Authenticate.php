@@ -15,9 +15,10 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
 
-        if (! $request->expectsJson() || $request->bearerToken() === null) {
+        if (!$request->expectsJson() || $request->bearerToken() === null) {
             return '401';
         }
+        return true;    
 
     }
 }
