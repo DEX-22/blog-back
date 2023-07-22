@@ -28,9 +28,9 @@ Route::post('/login', [LoginController::class,'login'])->name('api.login');
 
 Route::post('post/new',[PostController::class, 'create']);
 
-Route::prefix( 'auth')->middleware('auth')->group( function () {
+Route::prefix( 'auth')->middleware('auth:sanctum')->group( function () {
     
-    Route::post('user',[UserController::class,'index']);
+    Route::post('user',[UserController::class,'getUser']);
     
     Route::prefix('post')->group(function(){
 
