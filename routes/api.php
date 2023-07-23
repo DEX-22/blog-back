@@ -27,17 +27,17 @@ Route::post('/register', [Registercontroller::class,'register']);
 Route::post('/login', [LoginController::class,'login'])->name('api.login');
 
 Route::post('post/new',[PostController::class, 'create']);
-
-Route::prefix( 'auth')->middleware('auth:sanctum')->group( function () {
+Route::middleware('auth:sanctum')->get('/user',[UserController::class,'getUser'] );
+// Route::group(['middleware'=>['auth:sanctum']], function () {
     
-    Route::post('user',[UserController::class,'getUser']);
+//     Route::post('user',[UserController::class,'getUser']);
     
-    Route::prefix('post')->group(function(){
+//     Route::prefix('post')->group(function(){
 
-        Route::post('get-all',[PostController::class, 'getAll']);
-    });
+//         Route::post('get-all',[PostController::class, 'getAll']);
+//     });
 
-});
+// });
 
 // Route::group(['middleware' => ['blog:sanctum'] ],function () {
     Route::prefix('blog')->group(function(){
@@ -46,10 +46,10 @@ Route::prefix( 'auth')->middleware('auth:sanctum')->group( function () {
 
     //     Route::get('login',function (){
 
-    //         $blog= Blog::find(1);
+            // $blog= Blog::find(1);
             
-    //         $token = $blog->createToken('blog-token')->plainTextToken;
-    //         return $token;
+            // $token = $blog->createToken('blog-token')->plainTextToken;
+            // return $token;
     //     });
 
 

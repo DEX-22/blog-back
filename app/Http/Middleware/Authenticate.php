@@ -23,6 +23,6 @@ class Authenticate
             return $next($request);
         }
 
-        return response()->json(['NO AUTHORIZED'],401);  //$next($request);
+        return response()->json(['NO AUTHORIZED',UserController::validateToken($token)],401);  //$next($request);
     }
 }
