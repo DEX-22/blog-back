@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('token')->nullable();
+            $table->boolean('is_logged')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            // $table->string('token')->;
+            $table->string('avatar')->default("https://bulma.io/images/placeholders/64x64.png");
             $table->rememberToken();
             $table->timestamps();
         });

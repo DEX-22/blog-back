@@ -22,12 +22,15 @@ class LoginController extends Controller
             return response()->json($user->password,500);
         }
 
-
         if( $user->id && $passwordIsCorrect){
-            $token = $token ?? $user->createToken('token')->plainTextToken;
-    
+            $token = $user->createToken('accessToken')->plainTextToken;
+            $user->token = $token;
+            $user->save();
         }
-    
-        return response()->json(["token"=>$token,"user" => $user],200);
+
+        return response()->json(["token"=>$token,"user" => $user ],200);
+    }
+    public function logout(Request $request){
+        User::where('id',$request->id)->update(['token'=>null]);
     }
 }
