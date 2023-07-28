@@ -5,11 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-<<<<<<< Updated upstream
-        "php": "^8.0",
-=======
         "php": "^8.1",
->>>>>>> Stashed changes
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "9.0",
